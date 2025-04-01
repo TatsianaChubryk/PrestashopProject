@@ -32,7 +32,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(LOGIN_URL_FIELD_ERROR.getText(), INVALID_EMAIL_ERROR_TEXT);
     }
 
-    @Test(description = "Checking for an error message when the Email address is incorrect")
+    @Test(description = "Checking for an error message when the Password is incorrect")
     public void loginWithInvalidPasswordTest() {
         loginSteps.login(EMAIL_ADDRESS, INVALID_PASSWORD, LOGIN_PAGE_URL);
         Assert.assertEquals(LOGIN_URL_FIELD_ERROR.getText(), INVALID_PASSWORD_ERROR_TEXT);

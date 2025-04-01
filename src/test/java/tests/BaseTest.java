@@ -24,7 +24,6 @@ public class BaseTest extends BasePage {
     public static String TITLE = PropertyReader.getProperty("title");
     public static String EMPTY_FIELD_EMAIL_ERROR_TEXT = PropertyReader.getProperty("emptyEmailError");
     public static String EMPTY_FIELD_PASSWORD_ERROR_TEXT = PropertyReader.getProperty("emptyPasswordError");
-    public static String INCORRECT_FIELD_ERROR_TEXT = PropertyReader.getProperty("incorrectError");
     public static String INVALID_PASSWORD_ERROR_TEXT = PropertyReader.getProperty("invalidPasswordError");
     public static String INVALID_EMAIL_ERROR_TEXT = PropertyReader.getProperty("invalidEmailError");
 

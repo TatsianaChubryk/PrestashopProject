@@ -27,33 +27,4 @@ public class LoginPage extends BasePage {
         fillLoginForm(email, password);
         return new LoginPage();
     }
-
-    /*public LoginPage(WebDriver driver) {
-        super(driver);
-    }*/
-
-    /*public LoginPage openPage(String url) {
-        open(LOGIN_PAGE_URL);
-        return this;
-    }*/
-
- /*   public LoginPage login(String emailAddress, String password) {
-        new Input("email").write(emailAddress);
-        new Input("password").write(password);
-        new Button().click(SIGN_IN_BUTTON);
-        return this;
-    }*/
-
-    /*public void login(User user) {
-        EMAIL_ADDRESS.sendKeys(user.getEmailAddress());
-        PASSWORD.sendKeys(user.getPassword());
-        SIGN_IN_BUTTON.click();
-
-    }
-
-    public LoginPage waitForPageOpened() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) SIGN_IN_BUTTON));
-        return this;
-    }*/
 }
