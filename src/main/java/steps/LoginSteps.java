@@ -10,10 +10,11 @@ public class LoginSteps {
         this.loginPage = new LoginPage();
     }
 
-    @Step("Success Login by user: {email}")
+    @Step("Login by user: {email} and {password}")
     public void login(String emailAddress, String password, String url) {
         loginPage
                 .openLoginPage(url)
+                .isOpened()
                 .login(emailAddress, password);
     }
 }

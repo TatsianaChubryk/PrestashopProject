@@ -5,30 +5,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
-import pages.BasePage;
-import retry.PropertyReader;
+import pages.LoginPage;
+import pages.MyAccountPage;
+import utils.PropertyReader;
 import steps.LoginSteps;
 
 import java.util.HashMap;
-import java.util.Map;;
+import java.util.Map;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
-public class BaseTest extends BasePage {
-    protected LoginSteps loginSteps;
-
+public class BaseTest {
     public static String LOGIN_PAGE_URL = PropertyReader.getProperty("loginUrl");
     public static String EMAIL_ADDRESS = PropertyReader.getProperty("email");
     public static String INVALID_EMAIL_ADDRESS = PropertyReader.getProperty("incorrectEmail");
     public static String PASSWORD = PropertyReader.getProperty("password");
     public static String INVALID_PASSWORD = PropertyReader.getProperty("incorrectPassword");
-    public static String TITLE = PropertyReader.getProperty("title");
-    public static String EMPTY_FIELD_EMAIL_ERROR_TEXT = PropertyReader.getProperty("emptyEmailError");
-    public static String EMPTY_FIELD_PASSWORD_ERROR_TEXT = PropertyReader.getProperty("emptyPasswordError");
-    public static String INVALID_PASSWORD_ERROR_TEXT = PropertyReader.getProperty("invalidPasswordError");
-    public static String INVALID_EMAIL_ERROR_TEXT = PropertyReader.getProperty("invalidEmailError");
+
+    protected LoginSteps loginSteps;
+    protected LoginPage loginPage;
+    protected MyAccountPage myAccountPage;
 
     public void initPages() {
         loginSteps = new LoginSteps();
+        loginPage = new LoginPage();
+        myAccountPage = new MyAccountPage();
     }
 
     @BeforeMethod

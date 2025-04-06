@@ -1,9 +1,9 @@
-package retry;
+package utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-public class RetryLogic implements IRetryAnalyzer {
+public class Retry implements IRetryAnalyzer {
     private int count = 0;
     private final int maxRetryCount = 3;
 
@@ -11,8 +11,9 @@ public class RetryLogic implements IRetryAnalyzer {
     public boolean retry(ITestResult result) {
         if (count < maxRetryCount) {
             count++;
-            return true; // Повторяем тест
+            System.out.println("Retrying test " + result.getName() + " for the " + count + " time.");
+            return true;
         }
-        return false; // Не повторяем
+        return false;
     }
 }
