@@ -18,7 +18,7 @@ public class LoginTests extends BaseTest {
             retryAnalyzer = Retry.class)
     public void loginWithEmptyEmailTest() {
         loginSteps.login("", PASSWORD, LOGIN_PAGE_URL);
-        Assert.assertEquals(loginPage.getLoginFieldErrorMessageText(), loginPage.getEmptyEmailErrorText());
+        Assert.assertEquals(loginPage.getLoginFieldErrorMessageText(), loginPage.getEmptyEmailAddressErrorText());
     }
 
     @Test(description = "Checking for an error message when the Password is empty",

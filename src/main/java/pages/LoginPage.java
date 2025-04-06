@@ -17,12 +17,21 @@ public class LoginPage extends BasePage {
     SelenideElement EMAIL_ADDRESS = $x("//*[@id='email']");
     SelenideElement PASSWORD = $x("//*[@id='passwd']");
     SelenideElement SIGN_IN_BUTTON = $x("//*[@id='SubmitLogin']");
+    SelenideElement CREATE_ACCOUNT_BUTTON = $x("//*[@id='SubmitCreate']");
+    SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
     SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
     SelenideElement LOGIN_URL_FIELD_ERROR = $x("//*[@id='center_column']/div[1]/ol/li");
-    String emptyEmailErrorText = "An email address required.";
+    SelenideElement REGISTRATION_URL_FIELD_ERROR = $x("//*[@id='create_account_error']/ol/li");
+    SelenideElement REGISTRATION_FIELD_ERROR = $x("//*[@id='center_column']/div/ol/li[1]");
+    String emptyEmailAddressErrorText = "An email address required.";
     String emptyPasswordErrorText = "Password is required.";
     String invalidEmailErrorText = "Invalid email address.";
     String invalidPasswordErrorText = "Invalid password.";
+    String existingUserErrorText = "An account using this email address has already been registered. Please enter a valid password or request a new one.";
+    String emptyFirstNameErrorText = "firstname is required.";
+    String emptyLastNameErrorText = "lastname is required.";
+    String emptyPasswdErrorText = "passwd is required.";
+    String emptyEmailErrorText = "email is required.";
 
     public LoginPage() {
     }
@@ -58,10 +67,6 @@ public class LoginPage extends BasePage {
         log.info("Filling login form with email address and password");
         new Input("email").write(emailAddress);
         new Input("passwd").write(password);
-        /*isOpened();
-        EMAIL_ADDRESS.setValue(emailAddress);
-        PASSWORD.setValue(password);
-        SIGN_IN_BUTTON.click();*/
         return this;
     }
 
@@ -69,10 +74,9 @@ public class LoginPage extends BasePage {
      * Completes the login process by filling the form and clicking the Login button
      * @param emailAddress The email address
      * @param password The password
-     * @return LoginPage object
+     * @return MyAccountPage object
      */
     public MyAccountPage login(String emailAddress, String password) {
-        //isOpened();
         fillLoginForm(emailAddress, password);
         log.info("Clicking Login button to complete login");
         wait.until(ExpectedConditions.visibilityOf(TITLE_XPATH));
@@ -87,5 +91,37 @@ public class LoginPage extends BasePage {
     public String getLoginFieldErrorMessageText() {
         log.info("Getting login failed message from login page");
         return LOGIN_URL_FIELD_ERROR.getText();
+    }
+
+    /**
+     * Start the registration process by filling the form and clicking the Create button
+     * @param emailAddress The email address
+     * @return RegistrationPage object
+     */
+    public RegistrationPage firstStepRegistration (String emailAddress) {
+        log.info("Filling registration form with email address");
+        new Input("email_create").write(emailAddress);
+        log.info("Clicking Create button to continue registration");
+        wait.until(ExpectedConditions.visibilityOf(TITLE_XPATH));
+        new Button().click(CREATE_ACCOUNT_BUTTON);
+        return new RegistrationPage();
+    }
+
+    /**
+     * Gets the email failed message displayed on the registration form
+     * @return The login failed message
+     */
+    public String getRegistrationEmailErrorMessageText() {
+        log.info("Getting the email failed message displayed on the registration form");
+        return REGISTRATION_URL_FIELD_ERROR.getText();
+    }
+
+    /**
+     * Gets the failed message displayed on the registration form
+     * @return The login failed message
+     */
+    public String getRegistrationErrorMessageText() {
+        log.info("Getting the failed message displayed on the registration form");
+        return REGISTRATION_FIELD_ERROR.getText();
     }
 }
