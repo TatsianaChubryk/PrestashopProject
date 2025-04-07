@@ -12,7 +12,10 @@ import org.testng.annotations.Listeners;
 import pages.LoginPage;
 import pages.MyAccountPage;
 import pages.RegistrationPage;
+import pages.WomenPage;
+import steps.MyAccountSteps;
 import steps.RegistrationSteps;
+import steps.WomenSteps;
 import utils.PropertyReader;
 import steps.LoginSteps;
 
@@ -39,6 +42,9 @@ public class BaseTest {
     protected MyAccountPage myAccountPage;
     protected RegistrationSteps registrationSteps;
     protected RegistrationPage registrationPage;
+    protected WomenPage womenPage;
+    protected WomenSteps womenSteps;
+    protected MyAccountSteps myAccountSteps;
 
     public void initPages() {
         loginSteps = new LoginSteps();
@@ -46,6 +52,9 @@ public class BaseTest {
         myAccountPage = new MyAccountPage();
         registrationSteps = new RegistrationSteps();
         registrationPage = new RegistrationPage();
+        womenPage = new WomenPage();
+        womenSteps = new WomenSteps();
+        myAccountSteps = new MyAccountSteps();
     }
 
     @BeforeMethod
@@ -66,9 +75,9 @@ public class BaseTest {
         initPages();
     }
 
-    @AfterMethod
+  /*  @AfterMethod
     public void endTest() {
         getWebDriver().quit();
         log.info("Ending test");
-    }
+    }*/
 }
