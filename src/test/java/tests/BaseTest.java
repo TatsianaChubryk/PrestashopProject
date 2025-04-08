@@ -34,7 +34,6 @@ public class BaseTest {
     public static String FIRST_NAME = PropertyReader.getProperty("firstName");
     public static String LAST_NAME = PropertyReader.getProperty("LastName");
 
-
     protected LoginSteps loginSteps;
     protected LoginPage loginPage;
     protected MyAccountPage myAccountPage;
@@ -51,6 +50,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void initTest() {
+        log.info("Initializing test environment");
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
         options.addArguments("--disable-popup-blocking");

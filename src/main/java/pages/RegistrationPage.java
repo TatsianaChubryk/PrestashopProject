@@ -12,13 +12,16 @@ import static com.codeborne.selenide.Selenide.$x;
 @Log4j2
 @Getter
 public class RegistrationPage extends BasePage {
-    SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
-    SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
-    SelenideElement personalInformationTitle = $x("//*[@id='account-creation_form']/div[1]/h3");
+    private static final SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
+    private final SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
+    private final SelenideElement PERSONAL_INFORMATION_TITLE = $x("//*[@id='account-creation_form']/div[1]/h3");
+    private static final SelenideElement REGISTRATION_URL_FIELD_ERROR = $x("//*[@id='create_account_error']/ol/li");
+    private static final SelenideElement REGISTRATION_FIELD_ERROR = $x("//*[@id='center_column']/div/ol/li[1]");
 
-    public RegistrationPage() {}
+    public RegistrationPage() {
+    }
 
-    /**
+    /**public static final
      * Fills the registration form with the provided details
      * @param firstName The first name
      * @param lastName The last name
@@ -51,5 +54,33 @@ public class RegistrationPage extends BasePage {
         log.info("Clicking Create button to continue registration");
         new Button().click(REGISTER_BUTTON);
         return new MyAccountPage();
+    }
+
+    /**
+     * Gets the email failed message displayed on the registration form
+     * @return The login failed message
+     */
+    public String getRegistrationEmailErrorMessageText() {
+        try {
+            log.info("Getting the email failed message displayed on the registration form");
+            return REGISTRATION_URL_FIELD_ERROR.getText();
+        } catch (Exception e) {
+            log.error("Failed to get email field error message: " + e.getMessage());
+            return "";
+        }
+    }
+
+    /**
+     * Gets the failed message displayed on the registration form
+     * @return The login failed message
+     */
+    public String getRegistrationErrorMessageText() {
+        try {
+            log.info("Getting the failed message displayed on the registration form");
+            return REGISTRATION_FIELD_ERROR.getText();
+        } catch (Exception e) {
+            log.error("Failed to failed message displayed on the registration form error message: " + e.getMessage());
+            return "";
+        }
     }
 }

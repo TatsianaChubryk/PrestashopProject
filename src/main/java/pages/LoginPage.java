@@ -14,24 +14,13 @@ import static com.codeborne.selenide.Selenide.open;
 @Getter
 @Log4j2
 public class LoginPage extends BasePage {
-    SelenideElement EMAIL_ADDRESS = $x("//*[@id='email']");
-    SelenideElement PASSWORD = $x("//*[@id='passwd']");
-    SelenideElement SIGN_IN_BUTTON = $x("//*[@id='SubmitLogin']");
-    SelenideElement CREATE_ACCOUNT_BUTTON = $x("//*[@id='SubmitCreate']");
-    SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
-    SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
-    SelenideElement LOGIN_URL_FIELD_ERROR = $x("//*[@id='center_column']/div[1]/ol/li");
-    SelenideElement REGISTRATION_URL_FIELD_ERROR = $x("//*[@id='create_account_error']/ol/li");
-    SelenideElement REGISTRATION_FIELD_ERROR = $x("//*[@id='center_column']/div/ol/li[1]");
-    String emptyEmailAddressErrorText = "An email address required.";
-    String emptyPasswordErrorText = "Password is required.";
-    String invalidEmailErrorText = "Invalid email address.";
-    String invalidPasswordErrorText = "Invalid password.";
-    String existingUserErrorText = "An account using this email address has already been registered. Please enter a valid password or request a new one.";
-    String emptyFirstNameErrorText = "firstname is required.";
-    String emptyLastNameErrorText = "lastname is required.";
-    String emptyPasswdErrorText = "passwd is required.";
-    String emptyEmailErrorText = "email is required.";
+    private static final SelenideElement EMAIL_ADDRESS = $x("//*[@id='email']");
+    private static final SelenideElement SIGN_IN_BUTTON = $x("//*[@id='SubmitLogin']");
+    private static final SelenideElement CREATE_ACCOUNT_BUTTON = $x("//*[@id='SubmitCreate']");
+    private static final SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
+    private static final SelenideElement LOGIN_URL_FIELD_ERROR = $x("//*[@id='center_column']/div[1]/ol/li");
+    private final SelenideElement PASSWORD = $x("//*[@id='passwd']");
+    private final SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
 
     public LoginPage() {
     }
@@ -52,9 +41,14 @@ public class LoginPage extends BasePage {
      * @return LoginPage object
      */
     public LoginPage isOpened() {
-        log.info("Checking if login page is open");
-        EMAIL_ADDRESS.shouldBe(Condition.visible);
-        return this;
+        try {
+            log.info("Checking if login page is open");
+            EMAIL_ADDRESS.shouldBe(Condition.visible);
+            return this;
+        } catch (Exception e) {
+            log.error("Login page is not open or elements are not visible: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -89,8 +83,13 @@ public class LoginPage extends BasePage {
      * @return The login failed message
      */
     public String getLoginFieldErrorMessageText() {
-        log.info("Getting login failed message from login page");
-        return LOGIN_URL_FIELD_ERROR.getText();
+        try {
+            log.info("Getting login failed message from login page");
+            return LOGIN_URL_FIELD_ERROR.getText();
+        } catch (Exception e) {
+            log.error("Failed to get login field error message: " + e.getMessage());
+            return "";
+        }
     }
 
     /**
@@ -98,30 +97,12 @@ public class LoginPage extends BasePage {
      * @param emailAddress The email address
      * @return RegistrationPage object
      */
-    public RegistrationPage firstStepRegistration (String emailAddress) {
+    public RegistrationPage firstStepRegistration(String emailAddress) {
         log.info("Filling registration form with email address");
         new Input("email_create").write(emailAddress);
         log.info("Clicking Create button to continue registration");
         wait.until(ExpectedConditions.visibilityOf(TITLE_XPATH));
         new Button().click(CREATE_ACCOUNT_BUTTON);
         return new RegistrationPage();
-    }
-
-    /**
-     * Gets the email failed message displayed on the registration form
-     * @return The login failed message
-     */
-    public String getRegistrationEmailErrorMessageText() {
-        log.info("Getting the email failed message displayed on the registration form");
-        return REGISTRATION_URL_FIELD_ERROR.getText();
-    }
-
-    /**
-     * Gets the failed message displayed on the registration form
-     * @return The login failed message
-     */
-    public String getRegistrationErrorMessageText() {
-        log.info("Getting the failed message displayed on the registration form");
-        return REGISTRATION_FIELD_ERROR.getText();
     }
 }
