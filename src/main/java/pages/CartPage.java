@@ -53,4 +53,71 @@ public class CartPage extends BasePage {
         INCREASE_QUANTITY_BUTTON.click();
         return this;
     }
+
+    /**
+     * Get the price per unit of goods
+     * @return unitPriceText
+     */
+    public double getUnitPrice() {
+        log.info("Parsing price");
+        SelenideElement unitPriceElement = $x("//*[@class='cart_unit']//li");
+        String unitPriceText = unitPriceElement.getText().replace("$", "").trim(); // Удаляем символы, если необходимо
+        return Double.parseDouble(unitPriceText);
+    }
+
+    /**
+     * Get the current quantity of goods
+     * @return quantityText
+     */
+    public int getProductQuantity() {
+        log.info("Getting the current quantity of good");
+        SelenideElement quantityElement = $x("//*[@class='cart_quantity text-center']/input[1]");
+        String quantityText = quantityElement.getAttribute("value");
+        return Integer.parseInt(quantityText);
+    }
+
+    /**
+     * Get the total cost
+     * @return totalPriceText
+     */
+    public double getTotalValue() {
+        log.info("Getting total cost");
+        SelenideElement totalElement = $x("//*[@class='cart_total']/span");
+        String totalPriceText = totalElement.getText().replace("$", "").trim();
+        return Double.parseDouble(totalPriceText);
+    }
+
+    /**
+     * Get the total price of goods
+     * @return unitPriceText
+     */
+    public double getTotalProducts() {
+        log.info("Parsing total products price");
+        SelenideElement unitTotalElement = $x("//*[@id='total_product']");
+        String unitPriceText = unitTotalElement.getText().replace("$", "").trim();
+        return Double.parseDouble(unitPriceText);
+    }
+
+    /**
+     * Get the total shipping
+     * @return unitTotalShippingText
+     */
+    public double getTotalShipping() {
+        log.info("Parsing total shipping");
+        SelenideElement unitTotalShippingElement = $x("//*[@id='total_shipping']");
+        String unitTotalShippingText = unitTotalShippingElement.getText().replace("$", "").trim();
+        return Double.parseDouble(unitTotalShippingText);
+    }
+
+    /**
+     * Get the total
+     * @return unitTotalShippingText
+     */
+    public double getTotalOrderSum() {
+        log.info("Parsing total");
+        SelenideElement unitTotal = $x("//*[@id='total_price']");
+        String unitTotalText = unitTotal.getText().replace("$", "").trim();
+        return Double.parseDouble(unitTotalText);
+    }
+
 }

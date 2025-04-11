@@ -29,5 +29,33 @@ public class CartTest extends BaseTests {
                 .goToComparePage();
         compareSteps.addProductToCartWithProceed(1);
         cartSteps.increaseQuantityInCart();
+        cartSteps.verifyTotalCalculated();
+    }
+
+    @Test(description = "Calculation of the value in the 'Total' field when the quantity of goods decreases")
+    public void calculationTotalWhenDecreasing() {
+        loginSteps.login(EMAIL_ADDRESS, PASSWORD, LOGIN_PAGE_URL);
+        myAccountSteps.openWomenPage();
+        womenSteps
+                .addItemToCompare(3)
+                .goToComparePage();
+        compareSteps.addProductToCartWithProceed(1);
+        cartSteps.increaseQuantityInCart();
+        cartSteps.decreaseQuantityInCart();
+        cartSteps.verifyTotalCalculated();
+    }
+
+    @Test(description = "Calculation of the value in the 'Total' for the entire order")
+    public void calculationTotalOrder() {
+        loginSteps.login(EMAIL_ADDRESS, PASSWORD, LOGIN_PAGE_URL);
+        myAccountSteps.openWomenPage();
+        womenSteps
+                .addItemToCompare(3)
+                .addItemToCompare(4)
+                .goToComparePage();
+        compareSteps
+                .addProductToCartWithContinueShopping(1)
+                .addProductToCartWithProceed(2);
+        cartSteps.verifyTotalOrderCalculated();
     }
 }
