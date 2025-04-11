@@ -2,7 +2,9 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class WomenTest extends BaseTest {
+import static constants.ITestConstants.DRESSES_TITLE;
+
+public class WomenTests extends BaseTests {
 
     @Test(description = "Check sort by Price: Highest first")
     public void checkingSortByPrice() {
@@ -20,5 +22,14 @@ public class WomenTest extends BaseTest {
         womenSteps
                 .selectSortByName()
                 .checkAppliedSortByName();
+    }
+
+    @Test(description = "Check sort by Categories: Dresses")
+    public void checkingSortByCategories() {
+        loginSteps.login(EMAIL_ADDRESS, PASSWORD, LOGIN_PAGE_URL);
+        myAccountSteps.openWomenPage();
+        womenSteps
+                .selectSortByCategories()
+                .checkDressesTitle(DRESSES_TITLE);
     }
 }

@@ -1,19 +1,18 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 import utils.Retry;
 
 import static constants.ITestConstants.*;
 
-public class RegistrationTest extends BaseTest {
+public class RegistrationTests extends BaseTests {
 
     @Test(description = "Successful user registration")
     public void successRegistration() {
         registrationSteps
                 .firstStepRegister(REGISTRATION_EMAIL_ADDRESS, LOGIN_PAGE_URL)
                 .secondStepRegister(FIRST_NAME, LAST_NAME, REGISTRATION_EMAIL_ADDRESS, PASSWORD);
-        myAccountPage.getMyAccountTitle().shouldBe(Condition.visible);
+        myAccountSteps.checkMyAccountTitle(MY_ACCOUNT_TITLE);
     }
 
     @Test(description = "Registering an existing user",

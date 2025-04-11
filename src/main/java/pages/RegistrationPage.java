@@ -50,7 +50,6 @@ public class RegistrationPage extends BasePage {
     public MyAccountPage secondStepRegistration(String firstName, String lastName, String registrationEmail, String password) {
         fillSecondStepRegistration(firstName, lastName, registrationEmail, password);
         new Checkbox("newsletter").setCheckboxValue(true);
-        new Checkbox("optin").setCheckboxValue(true);
         log.info("Clicking Create button to continue registration");
         new Button().click(REGISTER_BUTTON);
         return new MyAccountPage();

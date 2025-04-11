@@ -41,4 +41,27 @@ public class WomenSteps {
         Assert.assertEquals(sortedProductNames, actualSortByName);
         return this;
     }
+
+    @Step("Select sort by Categories: Dresses")
+    public WomenSteps selectSortByCategories() {
+        womenPage.chooseSortByCategories();
+        return this;
+    }
+
+    @Step("Checking Dresses title")
+    public WomenSteps checkDressesTitle(String titleText) {
+        Assert.assertEquals(womenPage.getDressesTitle(), titleText);
+        return this;
+    }
+
+    @Step("Add item to compare")
+    public WomenSteps addItemToCompare(int itemIndex) {
+        womenPage.addItemToCompare(itemIndex);
+        return this;
+    }
+
+    @Step("Open Compare page")
+    public void goToComparePage() {
+        womenPage.goToComparePage();
+    }
 }
