@@ -1,7 +1,7 @@
 package steps;
 
 import io.qameta.allure.Step;
-import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
 import org.testng.Assert;
 import pages.CartPage;
 import java.util.List;
@@ -33,13 +33,15 @@ public class CartSteps {
     }
 
     @Step("Increase the number of items in the cart")
-    public void increaseQuantityInCart() {
+    public CartSteps increaseQuantityInCart() {
         cartPage.increaseQuantityInCart();
+        return this;
     }
 
     @Step("Decrease the number of items in the cart")
-    public void decreaseQuantityInCart() {
+    public CartSteps decreaseQuantityInCart() {
         cartPage.increaseQuantityInCart();
+        return this;
     }
 
     @Step("Verify total calculated")
@@ -52,11 +54,17 @@ public class CartSteps {
     }
 
     @Step("Verify total order calculated")
-    public void verifyTotalOrderCalculated() {
+    public CartSteps verifyTotalOrderCalculated() {
         double totalProducts = cartPage.getTotalProducts();
         double totalShipping = cartPage.getTotalShipping();
         double expectedTotalOrderSum = totalProducts + totalShipping;
         double actualTotalOrderSum = cartPage.getTotalOrderSum();
         Assert.assertEquals(actualTotalOrderSum, expectedTotalOrderSum);
+        return this;
+    }
+
+    @Step("Go to the Addresses step")
+    public void goToAddressesStep() {
+        cartPage.goToAddressesStep();
     }
 }

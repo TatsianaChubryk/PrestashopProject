@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
@@ -15,6 +16,7 @@ import utils.PropertyReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 @Log4j2
@@ -41,6 +43,8 @@ public class BaseTests {
     protected CartPage cartPage;
     protected CompareSteps compareSteps;
     protected CartSteps cartSteps;
+    protected OrderPage orderPage;
+    protected OrderSteps orderSteps;
 
     public void initPages() {
         loginSteps = new LoginSteps();
@@ -55,6 +59,8 @@ public class BaseTests {
         compareSteps = new CompareSteps();
         cartPage = new CartPage();
         cartSteps = new CartSteps();
+        orderPage = new OrderPage();
+        orderSteps = new OrderSteps();
     }
 
     @BeforeMethod
@@ -75,9 +81,9 @@ public class BaseTests {
         initPages();
     }
 
-   /* @AfterMethod
+    @AfterMethod
     public void endTest() {
         getWebDriver().quit();
         log.info("Ending test");
-    }*/
+    }
 }

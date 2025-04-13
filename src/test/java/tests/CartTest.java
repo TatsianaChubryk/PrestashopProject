@@ -2,6 +2,8 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import static constants.ITestConstants.DEMO_SIX;
+
 public class CartTest extends BaseTests {
 
     @Test(description = "Checking the removal of items in the cart")
@@ -17,7 +19,7 @@ public class CartTest extends BaseTests {
                 .addProductToCartWithProceed(2);
         cartSteps
                 .removeProductFromCart(0)
-                .verifyProductIsNotInCart("demo_1");
+                .verifyProductIsNotInCart(DEMO_SIX);
     }
 
     @Test(description = "Calculation of the value in the 'Total' field when the quantity of goods increases")
@@ -28,8 +30,9 @@ public class CartTest extends BaseTests {
                 .addItemToCompare(3)
                 .goToComparePage();
         compareSteps.addProductToCartWithProceed(1);
-        cartSteps.increaseQuantityInCart();
-        cartSteps.verifyTotalCalculated();
+        cartSteps
+                .increaseQuantityInCart()
+                .verifyTotalCalculated();
     }
 
     @Test(description = "Calculation of the value in the 'Total' field when the quantity of goods decreases")
@@ -40,9 +43,10 @@ public class CartTest extends BaseTests {
                 .addItemToCompare(3)
                 .goToComparePage();
         compareSteps.addProductToCartWithProceed(1);
-        cartSteps.increaseQuantityInCart();
-        cartSteps.decreaseQuantityInCart();
-        cartSteps.verifyTotalCalculated();
+        cartSteps
+                .increaseQuantityInCart()
+                .decreaseQuantityInCart()
+                .verifyTotalCalculated();
     }
 
     @Test(description = "Calculation of the value in the 'Total' for the entire order")

@@ -11,6 +11,7 @@ public interface ITestConstants {
     String EMPTY_PASSWD_ERROR_TEXT = "passwd is required.";
     String EMPTY_EMAIL_ERROR_TEXT = "email is required.";
     String MY_ACCOUNT_TITLE = "MY ACCOUNT";
-    String DRESSES_TITLE = "Women > Categories Dresses";
-    String DEMO_SIX = "demo_6";
+    String DRESSES_TITLE = "WOMEN ";
+    String DEMO_SIX = "demo_1";
+    String ORDER_CONFIRMATION_TEXT = "Your order on My Shop is complete.";
 }

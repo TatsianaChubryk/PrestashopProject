@@ -28,9 +28,8 @@ public class WomenPage extends BasePage {
     private final SelenideElement BLOCK_PRODUCT = $x("//*[contains(@class, 'ajax_block_product')]");
     private final SelenideElement ADD_TO_COMPARE = $(".addToCompare");
     private final SelenideElement COMPARE_BUTTON = $x("//*[@class='btn btn-default button button-medium bt_compare bt_compare']");
-    private final ElementsCollection productContainer = $$(".product-container");
-    private final SelenideElement addToCompareButton = $(".add_to_compare");
-
+    private final ElementsCollection PRODUCT_CONTAINER = $$(".product-container");
+    private final SelenideElement ADD_TO_COMPARE_BUTTON = $(".add_to_compare");
 
     public WomenPage() {
     }
@@ -130,7 +129,7 @@ public class WomenPage extends BasePage {
      */
     public WomenPage addItemToCompare(int indexItem) {
         log.info("Search container by name");
-        SelenideElement blockProduct = productContainer.get(indexItem);
+        SelenideElement blockProduct = PRODUCT_CONTAINER.get(indexItem);
         blockProduct.hover();
         log.info("Clicking Add to compare button");
         blockProduct.$(".add_to_compare").click();

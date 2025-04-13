@@ -7,6 +7,7 @@ import elements.Input;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import waiters.Waiter;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
@@ -22,6 +23,8 @@ public class LoginPage extends BasePage {
     private final SelenideElement PASSWORD = $x("//*[@id='passwd']");
     private final SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
 
+    Waiter waiter = new Waiter();
+
     public LoginPage() {
     }
 
@@ -31,6 +34,7 @@ public class LoginPage extends BasePage {
      * @return LoginPage object
      */
     public LoginPage openLoginPage(String url) {
+        waiter.waitForPageLoaded();
         log.info("Opening login page: " + url);
         open(url);
         return this;
