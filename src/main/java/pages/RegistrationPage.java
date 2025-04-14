@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import elements.Button;
 import elements.Checkbox;
+import elements.Dropdown;
 import elements.Input;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -36,6 +37,9 @@ public class RegistrationPage extends BasePage {
         new Input("customer_lastname").write(lastName);
         new Input("email").write(registrationEmail);
         new Input("passwd").write(password);
+        new Dropdown("days").selectByOption("10");
+        new Dropdown("months").selectByOption("3");
+        new Dropdown("years").selectByOption("2010");
         return this;
     }
 
