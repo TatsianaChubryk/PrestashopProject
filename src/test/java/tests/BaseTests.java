@@ -9,12 +9,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
-import pages.LoginPage;
-import pages.MyAccountPage;
-import pages.RegistrationPage;
-import steps.RegistrationSteps;
+import pages.*;
+import steps.*;
 import utils.PropertyReader;
-import steps.LoginSteps;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +21,7 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 @Log4j2
 @Listeners(TestListener.class)
-public class BaseTest {
+public class BaseTests {
     public static String LOGIN_PAGE_URL = PropertyReader.getProperty("loginUrl");
     public static String EMAIL_ADDRESS = PropertyReader.getProperty("email");
     public static String REGISTRATION_EMAIL_ADDRESS = PropertyReader.getProperty("registrationEmail");
@@ -39,6 +36,15 @@ public class BaseTest {
     protected MyAccountPage myAccountPage;
     protected RegistrationSteps registrationSteps;
     protected RegistrationPage registrationPage;
+    protected WomenPage womenPage;
+    protected WomenSteps womenSteps;
+    protected MyAccountSteps myAccountSteps;
+    protected ComparePage comparePage;
+    protected CartPage cartPage;
+    protected CompareSteps compareSteps;
+    protected CartSteps cartSteps;
+    protected OrderPage orderPage;
+    protected OrderSteps orderSteps;
 
     public void initPages() {
         loginSteps = new LoginSteps();
@@ -46,6 +52,15 @@ public class BaseTest {
         myAccountPage = new MyAccountPage();
         registrationSteps = new RegistrationSteps();
         registrationPage = new RegistrationPage();
+        womenPage = new WomenPage();
+        womenSteps = new WomenSteps();
+        myAccountSteps = new MyAccountSteps();
+        comparePage = new ComparePage();
+        compareSteps = new CompareSteps();
+        cartPage = new CartPage();
+        cartSteps = new CartSteps();
+        orderPage = new OrderPage();
+        orderSteps = new OrderSteps();
     }
 
     @BeforeMethod

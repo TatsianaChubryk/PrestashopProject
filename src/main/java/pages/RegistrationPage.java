@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import elements.Button;
 import elements.Checkbox;
+import elements.Dropdown;
 import elements.Input;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -36,6 +37,9 @@ public class RegistrationPage extends BasePage {
         new Input("customer_lastname").write(lastName);
         new Input("email").write(registrationEmail);
         new Input("passwd").write(password);
+        new Dropdown("days").selectByOption("10");
+        new Dropdown("months").selectByOption("3");
+        new Dropdown("years").selectByOption("2010");
         return this;
     }
 
@@ -50,7 +54,6 @@ public class RegistrationPage extends BasePage {
     public MyAccountPage secondStepRegistration(String firstName, String lastName, String registrationEmail, String password) {
         fillSecondStepRegistration(firstName, lastName, registrationEmail, password);
         new Checkbox("newsletter").setCheckboxValue(true);
-        new Checkbox("optin").setCheckboxValue(true);
         log.info("Clicking Create button to continue registration");
         new Button().click(REGISTER_BUTTON);
         return new MyAccountPage();

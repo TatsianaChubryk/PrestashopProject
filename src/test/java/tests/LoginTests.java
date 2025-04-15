@@ -1,18 +1,17 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 import utils.Retry;
 
 import static constants.ITestConstants.*;
 
-public class LoginTests extends BaseTest {
+public class LoginTests extends BaseTests {
 
     @Test(description = "Login with valid Email and Password data",
             retryAnalyzer = Retry.class)
     public void successLogin() {
         loginSteps.login(EMAIL_ADDRESS, PASSWORD, LOGIN_PAGE_URL);
-        myAccountPage.getMyAccountTitle().shouldBe(Condition.visible);
+        myAccountSteps.checkMyAccountTitle(MY_ACCOUNT_TITLE);
     }
 
     @Test(description = "Checking for an error message when the Email address is empty",

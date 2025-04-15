@@ -11,6 +11,7 @@ public class Input {
     public Input(String label) {
         this.label = label;
     }
+
     public Input write(String text){
         $x(String.format(inputLocator, label)).shouldBe(Condition.visible).setValue(text);
         return this;
