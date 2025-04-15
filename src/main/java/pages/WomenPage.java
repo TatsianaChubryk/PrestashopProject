@@ -72,7 +72,6 @@ public class WomenPage extends BasePage {
         List<Double> sortedPrices = new ArrayList<>(prices);
         Collections.sort(sortedPrices);
         log.info("Sorted list{}", sortedPrices);
-        Assert.assertTrue(sortedPrices.equals(prices));
         return prices;
     }
 

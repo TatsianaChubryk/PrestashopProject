@@ -18,6 +18,12 @@ public class CartPage extends BasePage {
     private ElementsCollection NAMES_PRODUCTS_IN_CART = $$(".cart_ref");
     private final SelenideElement INCREASE_QUANTITY_BUTTON = $x("//*[@class='icon-plus']");
     private final SelenideElement PROCCED_BUTTON = $x("//*[@id='center_column']/p[2]/a[1]");
+    private final SelenideElement UNIT_PRICE_ELEMENT = $x("//*[@class='cart_unit']//li");
+    private final SelenideElement QUANTITY_ELEMENT = $x("//*[@class='cart_quantity text-center']/input[1]");
+    private final SelenideElement TOTAL_ELEMENT = $x("//*[@class='cart_total']/span");
+    private final SelenideElement UNIT_TOTAL_ELEMENT = $x("//*[@id='total_product']");
+    private final SelenideElement UNIT_TOTAL_SHIPPING_ELEMENT = $x("//*[@id='total_shipping']");
+    private final SelenideElement UNIT_TOTAL = $x("//*[@id='total_price']");
 
     Waiter waiter = new Waiter();
 
@@ -29,7 +35,7 @@ public class CartPage extends BasePage {
      * @param indexItem
      * @return CartPage object
      */
-    public CartPage removeProductFromCart(int indexItem) {
+    public CartPage removeProductFromCartByIndex(int indexItem) {
         log.info("Clicking delete button in Cart");
         $$(".cart_quantity_delete").get(indexItem).click();
         return new CartPage();
@@ -42,7 +48,7 @@ public class CartPage extends BasePage {
     public List<String> getNamesProductsInShoppingCart() {
         log.info("Getting names products in shopping cart list");
         List<String> list = new ArrayList<>();
-        for (SelenideElement item : NAMES_PRODUCTS_IN_CART){
+        for (SelenideElement item : NAMES_PRODUCTS_IN_CART) {
             list.add(item.getText());
         }
         return list;
@@ -64,8 +70,7 @@ public class CartPage extends BasePage {
      */
     public double getUnitPrice() {
         log.info("Parsing price");
-        SelenideElement unitPriceElement = $x("//*[@class='cart_unit']//li");
-        String unitPriceText = unitPriceElement.getText().replace("$", "").trim(); // Удаляем символы, если необходимо
+        String unitPriceText = UNIT_PRICE_ELEMENT.getText().replace("$", "").trim();
         return Double.parseDouble(unitPriceText);
     }
 
@@ -75,8 +80,7 @@ public class CartPage extends BasePage {
      */
     public int getProductQuantity() {
         log.info("Getting the current quantity of good");
-        SelenideElement quantityElement = $x("//*[@class='cart_quantity text-center']/input[1]");
-        String quantityText = quantityElement.getAttribute("value");
+        String quantityText = QUANTITY_ELEMENT.getAttribute("value");
         return Integer.parseInt(quantityText);
     }
 
@@ -86,8 +90,7 @@ public class CartPage extends BasePage {
      */
     public double getTotalValue() {
         log.info("Getting total cost");
-        SelenideElement totalElement = $x("//*[@class='cart_total']/span");
-        String totalPriceText = totalElement.getText().replace("$", "").trim();
+        String totalPriceText = TOTAL_ELEMENT.getText().replace("$", "").trim();
         return Double.parseDouble(totalPriceText);
     }
 
@@ -97,8 +100,7 @@ public class CartPage extends BasePage {
      */
     public double getTotalProducts() {
         log.info("Parsing total products price");
-        SelenideElement unitTotalElement = $x("//*[@id='total_product']");
-        String unitPriceText = unitTotalElement.getText().replace("$", "").trim();
+        String unitPriceText = UNIT_TOTAL_ELEMENT.getText().replace("$", "").trim();
         return Double.parseDouble(unitPriceText);
     }
 
@@ -108,8 +110,7 @@ public class CartPage extends BasePage {
      */
     public double getTotalShipping() {
         log.info("Parsing total shipping");
-        SelenideElement unitTotalShippingElement = $x("//*[@id='total_shipping']");
-        String unitTotalShippingText = unitTotalShippingElement.getText().replace("$", "").trim();
+        String unitTotalShippingText = UNIT_TOTAL_SHIPPING_ELEMENT.getText().replace("$", "").trim();
         return Double.parseDouble(unitTotalShippingText);
     }
 
@@ -119,8 +120,7 @@ public class CartPage extends BasePage {
      */
     public double getTotalOrderSum() {
         log.info("Parsing total");
-        SelenideElement unitTotal = $x("//*[@id='total_price']");
-        String unitTotalText = unitTotal.getText().replace("$", "").trim();
+        String unitTotalText = UNIT_TOTAL.getText().replace("$", "").trim();
         return Double.parseDouble(unitTotalText);
     }
 

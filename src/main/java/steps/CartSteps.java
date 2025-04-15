@@ -1,7 +1,6 @@
 package steps;
 
 import io.qameta.allure.Step;
-import org.checkerframework.checker.units.qual.C;
 import org.testng.Assert;
 import pages.CartPage;
 import java.util.List;
@@ -15,7 +14,7 @@ public class CartSteps {
 
     @Step("Deleting an item from the cart")
     public CartSteps removeProductFromCart(int indexItem) {
-        cartPage.removeProductFromCart(indexItem);
+        cartPage.removeProductFromCartByIndex(indexItem);
         return this;
     }
 
