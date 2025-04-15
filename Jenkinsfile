@@ -18,9 +18,6 @@ pipeline {
             // Get some code from a GitHub repository
             git branch: "${params.BRANCH}", url: 'https://github.com/TatsianaChubryk/PrestashopProject.git'
 
-            // Run Maven on a Unix agent.
-//             sh "mvn clean test"
-
             // To run Maven on a Windows agent, use
             bat "mvn clean test -f pom.xml"
          }
