@@ -9,9 +9,8 @@ import static com.codeborne.selenide.Selenide.$x;
 @Log4j2
 @Getter
 public class MyAccountPage extends BasePage{
-    private final SelenideElement MY_ACCOUNT_TITLE = $x("//*[@id='center_column']/h1");
-    private final SelenideElement ACCOUNT_CREATED_TEXT = $x("//*[@id='center_column']/p[1]/text()");
-    private final SelenideElement WOMEN_BUTTON = $x("//*[@id='block_top_menu']/ul/li[1]/a");
+    private static final SelenideElement MY_ACCOUNT_TITLE = $x("//*[@id='center_column']/h1");
+    private static final SelenideElement WOMEN_BUTTON = $x("//*[@id='block_top_menu']/ul/li[1]/a");
 
     public MyAccountPage() {}
 

@@ -6,7 +6,6 @@ import elements.Button;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +29,7 @@ public class WomenPage extends BasePage {
     private final SelenideElement COMPARE_BUTTON = $x("//*[@class='btn btn-default button button-medium bt_compare bt_compare']");
     private final ElementsCollection PRODUCT_CONTAINER = $$(".product-container");
     private final SelenideElement ADD_TO_COMPARE_BUTTON = $(".add_to_compare");
+    private final ElementsCollection PRODUCTS_PRICE_LIST_PATH = $$(".product-price");
 
     public WomenPage() {
     }
@@ -63,7 +63,7 @@ public class WomenPage extends BasePage {
      * @return prices
      */
     public List<Double> getProductPrices() {
-        List<Double> prices = $$(".product-price").texts()
+        List<Double> prices = PRODUCTS_PRICE_LIST_PATH.texts()
                 .stream()
                 .map(this::parsePrice)
                 .filter(price -> price != null)
