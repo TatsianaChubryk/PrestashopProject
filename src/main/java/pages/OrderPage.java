@@ -9,11 +9,11 @@ import static com.codeborne.selenide.Selenide.$x;
 @Log4j2
 public class OrderPage extends BasePage {
 
-    private final SelenideElement PROCEED_ADDRESS_BUTTON = $x("//*[@name='processAddress']");
-    private final SelenideElement PROCEED_CARRIER_BUTTON = $x("//*[@name='processCarrier']");
-    private final SelenideElement PAY_BY_BANK_WIRE = $x("//*[@class='bankwire']");
-    private final SelenideElement CONFIRM_ORDER_BUTTON = $x("//*[@id='cart_navigation']/button");
-    private final SelenideElement COMPLETE_ORDER_TEXT = $x("//*[@id='center_column']/p[1]");
+    private static final SelenideElement PROCEED_ADDRESS_BUTTON = $x("//*[@name='processAddress']");
+    private static final SelenideElement PROCEED_CARRIER_BUTTON = $x("//*[@name='processCarrier']");
+    private static final SelenideElement PAY_BY_BANK_WIRE = $x("//*[@class='bankwire']");
+    private static final SelenideElement CONFIRM_ORDER_BUTTON = $x("//*[@id='cart_navigation']/button");
+    private static final SelenideElement COMPLETE_ORDER_TEXT = $x("//*[@id='center_column']/p[1]");
 
     public OrderPage() {
     }

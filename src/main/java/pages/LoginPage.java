@@ -9,8 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import waiters.Waiter;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 @Getter
 @Log4j2
@@ -20,8 +20,6 @@ public class LoginPage extends BasePage {
     private static final SelenideElement CREATE_ACCOUNT_BUTTON = $x("//*[@id='SubmitCreate']");
     private static final SelenideElement TITLE_XPATH = $x("//*[@id='center_column']/h1");
     private static final SelenideElement LOGIN_URL_FIELD_ERROR = $x("//*[@id='center_column']/div[1]/ol/li");
-    private final SelenideElement PASSWORD = $x("//*[@id='passwd']");
-    private final SelenideElement REGISTER_BUTTON = $x("//*[@id='submitAccount']");
 
     Waiter waiter = new Waiter();
 
@@ -47,7 +45,7 @@ public class LoginPage extends BasePage {
     public LoginPage isOpened() {
         try {
             log.info("Checking if login page is open");
-            EMAIL_ADDRESS.shouldBe(Condition.visible);
+            EMAIL_ADDRESS.shouldBe(visible);
             return this;
         } catch (Exception e) {
             log.error("Login page is not open or elements are not visible: " + e.getMessage());
@@ -77,7 +75,7 @@ public class LoginPage extends BasePage {
     public MyAccountPage login(String emailAddress, String password) {
         fillLoginForm(emailAddress, password);
         log.info("Clicking Login button to complete login");
-        wait.until(ExpectedConditions.visibilityOf(TITLE_XPATH));
+        $(TITLE_XPATH).shouldBe(visible);
         new Button().click(SIGN_IN_BUTTON);
         return new MyAccountPage();
     }

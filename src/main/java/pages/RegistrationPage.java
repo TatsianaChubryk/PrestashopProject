@@ -30,16 +30,17 @@ public class RegistrationPage extends BasePage {
      * @param password The password
      * @return RegistrationPage object
      */
-    private RegistrationPage fillSecondStepRegistration(String firstName, String lastName, String registrationEmail, String password) {
+    private RegistrationPage fillSecondStepRegistration(String firstName, String lastName,
+                                                        String registrationEmail, String password, String day, String month, String year) {
         log.info("Filling registration form with email, password, password hint.");
         new Checkbox("id_gender2").setCheckboxValue(true);
         new Input("customer_firstname").write(firstName);
         new Input("customer_lastname").write(lastName);
         new Input("email").write(registrationEmail);
         new Input("passwd").write(password);
-        new Dropdown("days").selectByOption("10");
-        new Dropdown("months").selectByOption("3");
-        new Dropdown("years").selectByOption("2010");
+        new Dropdown("days").selectByOption(day);
+        new Dropdown("months").selectByOption(month);
+        new Dropdown("years").selectByOption(year);
         return this;
     }
 
@@ -52,7 +53,7 @@ public class RegistrationPage extends BasePage {
      * @return MyAccountPage object
      */
     public MyAccountPage secondStepRegistration(String firstName, String lastName, String registrationEmail, String password) {
-        fillSecondStepRegistration(firstName, lastName, registrationEmail, password);
+        fillSecondStepRegistration(firstName, lastName, registrationEmail, password, "10", "3", "2010");
         new Checkbox("newsletter").setCheckboxValue(true);
         log.info("Clicking Create button to continue registration");
         new Button().click(REGISTER_BUTTON);
